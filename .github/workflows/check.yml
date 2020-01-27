@@ -1,6 +1,10 @@
 name: check
 
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      # Firestore checks itself
+      - '!Firestore/**'
 
 jobs:
   check:
