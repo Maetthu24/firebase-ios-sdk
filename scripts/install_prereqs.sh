@@ -88,7 +88,7 @@ fi
 
 echo "Installing prerequisites for $project for $platform using $method"
 
-if [[ ! -z $QUICKSTART ]]; then
+if [[ ! -z "${QUICKSTART:-}" ]]; then
   install_secrets
   scripts/setup_quickstart.sh "$QUICKSTART"
 fi
