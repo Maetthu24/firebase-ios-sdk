@@ -35,26 +35,21 @@ on:
     - cron:  '0 7 * * *'
 
 jobs:
-  check:
-    runs-on: macOS-latest
-    steps:
-    - uses: actions/checkout@v1
-
-    - name: Setup check
-      run:  scripts/setup_check.sh
-
-    - name: Check
-      run:  scripts/check.sh --test-only
-
-
   firestore-macos-cmake:
     runs-on: macos-latest
-    needs: check
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
-    - name: Setup
-      run:  scripts/install_prereqs.sh Firestore cmake macOS
+    # Run source checks inline in the first job. For maximum compatibility with
+    # the rest of the Firebase builds, this should run-on: macos-latest.
+    - name: Setup checks
+      run:  scripts/setup_check.sh
+
+    - name: Run checks
+      run:  scripts/check.sh --test-only
+
+    - name: Setup build
+      run:  scripts/install_prereqs.sh Firestore macOS cmake
 
     - name: Build and test
-      run:  scripts/third_party/travis/retry.sh scripts/build.sh Firestore cmake macOS
+      run:  scripts/third_party/travis/retry.sh scripts/build.sh Firestore macOS cmake
