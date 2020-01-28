@@ -311,7 +311,7 @@ case "$product-$platform-$method" in
       cmake -G Ninja "${cmake_options[@]}" ..
 
       echo "Building cmake build ..."
-      ninja all
+      ninja -k 10 all
       ctest --output-on-failure
     )
     ;;
