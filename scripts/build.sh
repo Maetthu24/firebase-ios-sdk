@@ -304,13 +304,15 @@ case "$product-$platform-$method" in
     trap '"${firestore_emulator}" stop' ERR EXIT
 
     test -d build || mkdir build
+    cd build
+
     echo "Preparing cmake build ..."
-    (cd build; cmake "${cmake_options[@]}" ..)
+    cmake -G Ninja "${cmake_options[@]}" ..
 
     echo "Building cmake build ..."
-    cpus=$(num_cpus)
-    (cd build; env make -j $cpus all generate_protos)
-    (cd build; env CTEST_OUTPUT_ON_FAILURE=1 make -j $cpus test)
+    ninja generate_protos
+    ninja all
+    ctest --output-on-failure
     ;;
 
   SymbolCollision-*-xcodebuild)
