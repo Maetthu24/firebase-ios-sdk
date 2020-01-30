@@ -153,6 +153,7 @@ let package = Package(
       publicHeadersPath: "Public",
       cSettings: [
         .headerSearchPath("."),
+        .headerSearchPath("./Private"),
         .headerSearchPath("../Firebase"), // TODO - remove this in favor of putting Firebase in imports.
         .headerSearchPath("../../GoogleUtilities/Logger/Private"), // SPM doesn't support private headers
         .define("FIRCore_VERSION", to: "0.0.1"),  // TODO Fix version
