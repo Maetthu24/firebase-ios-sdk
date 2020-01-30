@@ -230,7 +230,8 @@ let package = Package(
       publicHeadersPath: "Public",
       cSettings: [
          // SPM doesn't support interface frameworks or private headers
-        .headerSearchPath("."),
+        .headerSearchPath(".."),
+        .headerSearchPath("../.."),
         .headerSearchPath("../../Firebase"),
         .headerSearchPath("../../Interop/Auth/Public"),
         .headerSearchPath("../Core/Private"), // SPM doesn't support private headers
