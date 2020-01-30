@@ -208,7 +208,8 @@ let package = Package(
       publicHeadersPath: "Public",
       cSettings: [
          // SPM doesn't support interface frameworks or private headers
-        .headerSearchPath("."),
+        .headerSearchPath(".."),
+        .headerSearchPath("../.."),
         .define("FIRFunctions_VERSION", to: "0.0.1"),  // TODO Fix version
         .define("SWIFT_PACKAGE", to: "1"),  // SPM loses defaults if other cSettings
       ]),
