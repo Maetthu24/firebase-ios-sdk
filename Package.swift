@@ -152,6 +152,7 @@ let package = Package(
       path: "Firebase/Core",
       publicHeadersPath: "Public",
       cSettings: [
+        .headerSearchPath(".."),
         .headerSearchPath("../.."),
         .headerSearchPath("./Private"),
         .headerSearchPath("./Public"),
